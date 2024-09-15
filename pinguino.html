@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css"> 
+    <title>Carta para ti</title>
+
+</head>
+
+<body>
+    <!-- Pantalla de inicio -->
+    <div class="start-screen" id="start-screen">
+        <h2>Haz clic en comenzar</h2>
+        <button id="start-button">Comenzar</button>
+    </div>
+
+
+    <!-- Contenedor principal con imagen de fondo -->
+    <div class="background-container">
+
+        <!-- Audio que se reproducirá automáticamente -->
+        <audio id="background-music" src="music/Río Roma - Cosas Que Nunca Te Dije.mp3" loop></audio>
+
+        <!-- Controles para la música -->
+        <div class="music-controls">
+            <br>
+            <br>
+            <br>
+
+            <button id="music-toggle">Pausar Música</button>
+        </div>
+
+        <!-- Secciones controladas por radio buttons -->
+        <input type="radio" name="gift" id="gift1" checked>
+        <input type="radio" name="gift" id="boton1">
+        <input type="radio" name="gift" id="small-gift-message">
+        <input type="radio" name="gift" id="mensajeFinal">
+
+        <div class="container">
+            <div class="content">
+
+                <div class="window" id="window1">
+                    <div class="initial-gift-message">
+                        <div class="mensajeFinal">
+                        Desde el monte que te vi, <br>
+                        no esperaba encontrar nada,<br>
+                        pero al cruzar caminos,<br>
+                        fuiste convirtiéndote en todo.<br>
+                        </div>
+                    </div>
+                    <div class="dibujo">
+                        <img style="width: 25vh;" src="imagen/pinguino1.png" alt="Pingüino">
+                    </div>
+                    <label for="boton1" class="boton">Continuar</label>
+                </div>
+
+                <!-- Segunda ventana: Ha llegado esto para ti -->
+                <div class="window" id="window2">
+                    <div class="initial-gift-message-2">
+                        <div class="mensajeFinal">
+                        Entre las cosas que nunca te dije,<br>
+                        hoy quiero dejarte este mensaje ✉️<br>
+                        </div>
+                    </div>
+                    <div class="dibujo1">
+                        <!-- Pingüino sin la carta -->
+                        <img class="pingüino" src="imagen/pinguino1.png" alt="Pingüino">
+                        <!-- Imagen de la carta -->
+                        <img class="carta" src="imagen/carta.png" alt="Carta">
+                    </div>
+                    <label for="small-gift-message" class="boton2">Leer carta</label>
+                </div>
+
+                <!-- Tercera ventana: Mensaje final -->
+                <div class="window" id="window3">
+                    <div class="mensajeFinal">
+                        <span class="textoCarta">
+                            <div class="window" id="window3">
+                                <div class="mensajeFinal">
+                                    <span class="textoCarta">
+                                        Está la verdad en mi silencio, <br>
+                                        los momentos que guardé para mí, <br>
+                                        y la admiración que, en secreto, creció. <br>
+                                        <br>
+                                        A cada paso, tus gestos <br>
+                                        fueron dejando huellas profundas. <br>
+                                        <br>
+                                        No busco decirlo todo, <br>
+                                        porque lo más importante <br>
+                                        se siente más que se dice. <br>
+                                        Solo quiero que sepas que, <br>
+                                        sin saberlo, te volviste mi todo. <br>
+                                        <br>
+                                        🐧❤️🐧
+                                    </span>
+                                </div>
+                            </div>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Script para generar los copos de nieve -->
+    <script>
+        const numFlakes = 50;
+
+        function createSnowflakes() {
+            const body = document.querySelector('body');
+            for (let i = 0; i < numFlakes; i++) {
+                const snowflake = document.createElement('div');
+                snowflake.classList.add('snowflake');
+
+                const size = Math.random() * 10 + 5 + 'px';
+                const left = Math.random() * 100 + 'vw';
+                const delay = Math.random() * 5 + 's';
+                const duration = Math.random() * 5 + 5 + 's';
+
+                snowflake.style.width = size;
+                snowflake.style.height = size;
+                snowflake.style.left = left;
+                snowflake.style.animationDelay = delay;
+                snowflake.style.animationDuration = duration;
+
+                body.appendChild(snowflake);
+            }
+        }
+
+        window.onload = createSnowflakes;
+    </script>
+
+    <!-- Script para controlar la música y la pantalla de inicio -->
+    <script>
+        const music = document.getElementById('background-music');
+        const musicToggleBtn = document.getElementById('music-toggle');
+        const startScreen = document.getElementById('start-screen');
+        const startButton = document.getElementById('start-button');
+
+        musicToggleBtn.addEventListener('click', function () {
+            if (music.paused) {
+                music.play(); // Reanudar la música
+                musicToggleBtn.textContent = 'Pausar Música';
+            } else {
+                music.pause(); // Pausar la música
+                musicToggleBtn.textContent = 'Reproducir Música';
+            }
+        });
+
+        startButton.addEventListener('click', function () {
+            music.play().then(() => {
+                startScreen.style.display = 'none'; // Ocultar la pantalla de inicio
+            }).catch(() => {
+                musicToggleBtn.textContent = 'Reproducir Música'; // Si el navegador bloquea la reproducción automática
+            });
+        });
+    </script>
+
+</body>
+
+</html>
+
+
